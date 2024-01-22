@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Users - MovieWeb App</title>
+
+      <link rel="stylesheet" href="static/style.css">
+</head>
+<body style="background-color:#ADD8E6; color: #333; padding: 10px;">
+
+<h1 style="text-align:center">MovieWeb App</h1>
+
+
+
+<h3>Add Movie:</h3>
+
+    <form action="/users/{{user_id}}/add_movie" method="POST">
+
+        <label for="name">Movie Name:</label>
+
+        <input type="text" PLACEHOLDER="Enter a movie name" name="name" id="name" required>
+
+        <input type="submit" value="Submit">
+
+
+    </form>
+
+
+
+
+</body>
+</html>

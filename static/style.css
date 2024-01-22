@@ -1,0 +1,23 @@
+
+*{
+ background-color:#ADD8E6; color: #333; padding: 10px;
+
+}
+
+input{
+    cursor:pointer;
+    margin-bottom:20px;
+                  margin-left:20px;color: red; border-radius:10px;padding:5px;
+}
+h1{
+text-align:center;
+}
+
+img{
+
+width:150px;
+height:150px;
+}
+
+ol{
+ display:flex;flex-wrap:wrap;justify-content:space-between;

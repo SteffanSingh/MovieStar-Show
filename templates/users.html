@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Users - MovieWeb App</title>
+    <link rel="stylesheet" href="static/style.css">
+
+</head>
+<body >
+<h1 style="text-align:center">MovieWeb App</h1>
+
+
+
+<h3>Users:</h3>
+    <ol>
+
+       {%  for  user in users %}
+<div style="display:flex;flex-direction:column;">
+
+            <li><strong> <em>{{user}}</em> </strong> ~<a href="/users/{{user_id_list[users.index(user)] }}">Favourite movies</a></li>
+
+        <span>
+            <form action="/delete_user/{{user_id_list[users.index(user)] }}" >
+            <input style="background-color:light grey; color:red;" type="Submit" value="Delete user">
+        </form>
+        </span>
+        </div>
+
+        {% endfor %}
+    </ol>
+
+
+
+    <form action="/add_user" >
+
+     <input style="margin-bottom:20px;
+                  margin-left:20px;color:green; border-radius:10px;
+                  padding:10px;" type="Submit" value="Add User">
+
+     </form>
+
+</body>
+</html>
