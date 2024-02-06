@@ -30,11 +30,7 @@ db.init_app(app)
 data_file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'data.json')
 
 
-def file_data(filename):
-    with open(filename, "r") as fileObject:
-        json_data = fileObject.read()
-        data = json.loads(json_data)
-    return data
+
 
 class SQLiteDataManager(DataManagerInterface):
     def __init__(self, filename):

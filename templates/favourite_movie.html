@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Users - MovieWeb App</title>
+    <title> MovieWeb App</title>
     <link rel="stylesheet" href="static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -18,13 +18,22 @@
        {%  for  movie in movies %}
        <li>
             <div class="card" style="width: 18rem;">
-  <img src="{{movie.poster}}" class="card-img-top" alt="" width="150px" height="150px">
+                {% if movie.note  %}
+
+  <img src="{{movie.poster}}" title="{{movie.note}}" style="cursor:pointer;"  class="card-img-top" alt="" width="150px" height="150px">
+
+                {% endif %}
+
+                {% if not movie.note  %}
+  <img src="{{movie.poster}}" style="cursor:pointer;"  class="card-img-top" alt="" width="150px" height="150px">
+
+                {% endif %}
 
   <div class="card-body">
 
     <span> <em><strong>{{movie.movie_name}}</strong> </em>  </span><br>
-        <span>  year:{{movie["year"] }}, </span>
-        <span> Rating:{{movie["rating"] }} </span><br><br>
+        <span>  year:{{movie.year }}, </span>
+        <span> Rating:{{movie.rating }} </span><br><br>
 
   </div>
         </div>
@@ -32,14 +41,14 @@
            <span style="display:flex">
                <form action="/users/{{user_id}}/update_movie/{{movie.movie_id}}"  >
             <input type="Submit"
-                   style="margin-bottom:20px;
+                   style="margin-bottom:20px;cursor:pointer;
                    color:light yellow; border-radius:10px;padding:5px 10px 5px 10px ;"
                             value="EDIT" >
 
         </form> <br>
 
              <form action="/users/{{user_id}}/delete_movie/{{movie.movie_id}}" >
-                  <input style="margin-bottom:20px;
+                  <input style="margin-bottom:20px;cursor:pointer;
                   margin-left:20px;color:red; border-radius:10px;padding:5px;"
                          type="Submit"  value="DELETE" >
 

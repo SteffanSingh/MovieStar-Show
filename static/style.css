@@ -19,5 +19,12 @@ width:150px;
 height:150px;
 }
 
+.card-img-top:hover{
+
+cursor:pointer;
+
+}
+
+
 ol{
  display:flex;flex-wrap:wrap;justify-content:space-between;
