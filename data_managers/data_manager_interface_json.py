@@ -5,52 +5,41 @@ from .data_manager_interface import DataManagerInterface
 from flask_sqlalchemy import  SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from flask import  Flask
+from flask import  Flask,session
 from MovieWeb_app.data_managers.data_models import User, Movie
+from .data_models import   db
 
 
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy()
-Base = declarative_base()
-
-engine = create_engine('sqlite:///moviwebapp.sqlite')
-Base.metadata.create_all(engine)
-
-# Create a database session
-Session = sessionmaker(bind=engine)
-session = Session()
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///moviwebapp.sqlite'
-db.init_app(app)
+
+
+
 
 # Define the path to the data.json file
-data_file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'data.json')
 
 
 
 
 class SQLiteDataManager(DataManagerInterface):
-    def __init__(self, filename):
-        self.db = SQLAlchemy(filename)
+    def __init__(self, db):
+        self.db = db
 
     def get_all_users(self):
         # Return all the users all users
-        users_data = self.db.session.query(User).all()
-        users_list = [user.name for user in users_data]
+
+        users_list = ""
         return users_list
 
     def get_all_users_id(self):
-        users_data = self.db.session.query(User).all()
-        users_id_list = [user.id for user in users_data]
+
+        users_id_list = 2
         return users_id_list
 
     def get_all_movies_id(self, user_id):
         movies_data = self.db.session.query(Movie).filter(Movie.user_id == user_id).all()
         user_movies_id_list = [movie.id for movie in movies_data]
-
         return user_movies_id_list
 
 
@@ -92,3 +81,8 @@ class SQLiteDataManager(DataManagerInterface):
 
 #with app.app_context():
  #   db.create_all()
+
+
+
+
+
