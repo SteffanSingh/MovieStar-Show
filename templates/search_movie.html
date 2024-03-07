@@ -25,17 +25,23 @@
             <div>
                 <li>
                     <div class="card" style="width: 100%;height:250px; border-radius: 10px; overflow: hidden;">
-                        {% if movie.note %}
-                        <img src="{{movie.poster}}" title="{{movie.note}}" style="cursor: pointer;
+
+                         {% if movie.note %}
+
+                        <a href="https://www.omdbapi.com/"><img src="{{movie.poster}}" title="{{movie.note}}" style="cursor: pointer;
                          width: 100%; height: 100%;
                          border-top-left-radius: 10px;
                          border-top-right-radius: 10px;"
-                             class="card-img-top" alt="">
+                             class="card-img-top" alt=""></a>
+
                         {% else %}
-                        <img src="{{movie.poster}}" style="cursor: pointer; width: 100%;
+                      <a href="https://www.omdbapi.com/">
+                          <img src="{{movie.poster}}" style="cursor: pointer; width: 100%;
                         height: 100%; border-top-left-radius: 10px;
-                         border-top-right-radius: 10px;" class="card-img-top" alt="">
+                         border-top-right-radius: 10px;" class="card-img-top" alt=""></a>
                         {% endif %}
+
+
                     </div>
 
                     <div class="card-body" style="padding: 20px;">

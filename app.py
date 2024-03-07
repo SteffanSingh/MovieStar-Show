@@ -77,7 +77,7 @@ def user_movie_list(user_id):
 
 
 
-    return render_template("favourite_movie.html", user_name = user_name, movies = user_movies, user_id = user_id)
+    return render_template("favourite_movie.html", user_name = user_name.title(), movies = user_movies, user_id = user_id)
 
 
 
@@ -183,7 +183,7 @@ def update_movie(user_id, movie_id):
                 movie_to_update.note  = note if note else None
                 session.commit()
                 return render_template("favourite_movie.html", user_name=user_name, user_id=user_id, movie_id = movie_id, movies = user_movie_list)
-    return render_template("update.html", user_name = user_name, movie_id = movie_id, movies = user_movie_list, user_id = user_id)
+    return render_template("update.html", user_name = user_name.title(), movie_id = movie_id, movies = user_movie_list, user_id = user_id)
 
 
 @app.route("/users/<int:user_id>/delete_movie/<int:movie_id>")
@@ -213,7 +213,7 @@ def sort_movies(user_id):
     sorted_movie_list = session.query(Movie).join(User.movies).filter(User.id==user_id).\
                             order_by(Movie.movie_name).all()
 
-    return render_template("favourite_movie.html", user_name=user_name, movies=sorted_movie_list, user_id=user_id)
+    return render_template("favourite_movie.html", user_name=user_name.title(), movies=sorted_movie_list, user_id=user_id)
 
 
 
@@ -233,12 +233,12 @@ def search_movie(user_id):
 
         if search_movies_list:
 
-            return render_template("search_movie.html",user_name=user_name,keyword=keyword, movies=search_movies_list, user_id=user_id)
+            return render_template("search_movie.html",user_name=user_name.title(),keyword=keyword, movies=search_movies_list, user_id=user_id)
         else:
             return render_template("no_movie_found.html", user_id=user_id)
 
     user_movie_list = user.movie
-    return render_template("favourite_movie.html", user_name=user_name, movies=user_movie_list, user_id=user_id)
+    return render_template("favourite_movie.html", user_name=user_name.title(), movies=user_movie_list, user_id=user_id)
 
 
 @app.route("/add_review/<int:user_id>/<int:movie_id>" , methods=["GET","POST"])
