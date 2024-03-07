@@ -211,8 +211,15 @@ def search_movie(user_id):
     user_name = user.name
     if request.method== "POST":
         keyword= request.form.get("keyword")
-        search_movies_list= session.query(Movie).join(Movie.user).\
-            filter(or_(Movie.movie_name.like(f"%{keyword}%"), Movie.year.like(f"%{keyword}%"), Movie.director.like(f"%{keyword}%"))).all()
+        search_movies_list = session.query(Movie). \
+            filter(or_(
+            Movie.movie_name.like(f"%{keyword}%"),
+            Movie.year.like(f"%{keyword}%"),
+            Movie.director.like(f"%{keyword}%"),
+        (Movie.rating >= f"{keyword}"))).all()
+
+
+
         if search_movies_list:
 
             return render_template("search_movie.html",user_name=user_name,keyword=keyword, movies=search_movies_list, user_id=user_id)

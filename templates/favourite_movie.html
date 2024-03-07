@@ -15,9 +15,22 @@
 
 
 <form method="POST" action="/search/{{user_id}}" style="margin-bottom:15px">
-        <label for="keyword">Enter Keyword for Search Movie:</label>
-        <input type="text" id="keyword" name="keyword" required>
-        <input type="submit" value="Search">
+        <em> <strong>
+
+            <label for="keyword">Enter Keyword for Search Movie:</label>
+
+        </strong> </em>
+
+        <span>
+            <input type="text" id="keyword" name="keyword" required>
+
+        <input type="submit" style="
+          color: #fff; background-color: #28a745;
+         border: 2px solid #28a745; border-radius: 5px;
+         padding: 5px; cursor: pointer;" value="Search"></span>
+
+          
+
     </form>
 </div>
 
@@ -101,7 +114,11 @@
         <input type="submit" style="margin-bottom: 20px; margin-left: 20px; color: #fff; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Add Movie">
     </form>
     <form action="/users">
-        <input type="submit" style="margin-bottom: 20px; margin-left: 20px; color: #fff; background-color: #28a745; border: 2px solid #28a745; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Go back to Users List">
+        <input type="submit" style="margin-bottom: 20px;
+        margin-left: 20px; color: #fff; background-color: #28a745;
+         border: 2px solid #28a745; border-radius: 5px;
+         padding: 10px; cursor: pointer;
+         transition: background-color 0.3s, border-color 0.3s;" value="Go back to Users List">
     </form>
 </div>
 
