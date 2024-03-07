@@ -13,6 +13,13 @@
 <div style="display:flex; justify-content:space-between">
 <h3 style="  color: #dc3545;"><mark>{{user_name}}</mark>'s Favorite Movies</h3>
 
+    <form action="/sort/{{user_id}}">
+        <input type="submit" style="
+          color: red;
+           border-radius: 10px;border:none;
+         padding: 5px; cursor: pointer;
+         transition: background-color 0.3s, border-color 0.3s;" value="Sort the movie list">
+    </form>
 
 <form method="POST" action="/search/{{user_id}}" style="margin-bottom:15px">
         <em> <strong>
@@ -21,15 +28,14 @@
 
         </strong> </em>
 
-        <span>
+
             <input type="text" id="keyword" name="keyword" required>
 
         <input type="submit" style="
           color: #fff; background-color: #28a745;
          border: 2px solid #28a745; border-radius: 5px;
-         padding: 5px; cursor: pointer;" value="Search"></span>
+         padding: 5px; cursor: pointer;" value="Search">
 
-          
 
     </form>
 </div>

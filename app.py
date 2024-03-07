@@ -204,6 +204,19 @@ def delete_movie(user_id, movie_id):
 
     return redirect(url_for("user_movie_list", user_id=user_id))
 
+
+@app.route("/sort/<int:user_id>", methods=["GET", "POST"])
+def sort_movies(user_id):
+    """Function to sort the movie in """
+    user= session.query(User).get(user_id)
+    user_name = user.name
+    sorted_movie_list = session.query(Movie).join(User.movies).filter(User.id==user_id).\
+                            order_by(Movie.movie_name).all()
+
+    return render_template("favourite_movie.html", user_name=user_name, movies=sorted_movie_list, user_id=user_id)
+
+
+
 @app.route("/search/<int:user_id>", methods= ["GET", "POST"])
 def search_movie(user_id):
     """Function to implement the movies on searched keyword:"""
@@ -211,14 +224,12 @@ def search_movie(user_id):
     user_name = user.name
     if request.method== "POST":
         keyword= request.form.get("keyword")
-        search_movies_list = session.query(Movie). \
+        search_movies_list = session.query(Movie).join(User.movies).filter(User.id==user_id).\
             filter(or_(
-            Movie.movie_name.like(f"%{keyword}%"),
-            Movie.year.like(f"%{keyword}%"),
-            Movie.director.like(f"%{keyword}%"),
+            Movie.movie_name.ilike(f"%{keyword}%"),
+            Movie.year.ilike(f"%{keyword}%"),
+            Movie.director.ilike(f"%{keyword}%"),
         (Movie.rating >= f"{keyword}"))).all()
-
-
 
         if search_movies_list:
 
