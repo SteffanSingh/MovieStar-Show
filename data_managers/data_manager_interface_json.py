@@ -2,11 +2,11 @@ import json
 import os
 from .data_manager_interface import DataManagerInterface
 
-from flask_sqlalchemy import  SQLAlchemy
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from flask import  Flask,session
-from MovieWeb_app.data_managers.data_models import User, Movie
+from data_managers.data_models import User, Movie
 from .data_models import   db
 
 

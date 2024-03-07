@@ -1,6 +1,6 @@
 # api.py
 from flask import Blueprint, jsonify
-from MovieWeb_app.data_managers.data_models import  User, Movie,db, Review
+from data_managers.data_models import  User, Movie,db, Review
 from flask import Flask,  render_template, request,redirect,url_for, session
 
 

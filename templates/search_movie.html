@@ -10,16 +10,9 @@
 
 <h1 style="text-align:center; color: #dc3545;">MovieWeb App</h1>
 
-<div style="display:flex; justify-content:space-between">
-<h3 style="  color: #dc3545;"><mark>{{user_name}}</mark>'s Favorite Movies</h3>
+<h2 style="text-align: center; color: #dc3545;"><mark>{{user_name}}</mark>'s Movie</h2>
 
-
-<form method="POST" action="/search/{{user_id}}" style="margin-bottom:15px">
-        <label for="keyword">Enter Keyword for Search Movie:</label>
-        <input type="text" id="keyword" name="keyword" required>
-        <input type="submit" value="Search">
-    </form>
-</div>
+     <h3> Searched Movies for Keyword: <strong><em style="color:blue;">{{keyword}}</em></strong> are : </h3>
 
 <div style="display: flex; justify-content: center; margin-bottom: 40px;">
     <ul style="list-style: none; padding: 0; margin: 0; display: flex;
@@ -95,14 +88,21 @@
 
 
 
-
-<div style="display: flex; justify-content: center;">
+<!-- html code to implement the button to add movie-->
+<div style="display: flex; justify-content: space-around;">
     <form action="/users/{{user_id}}/add_movie">
         <input type="submit" style="margin-bottom: 20px; margin-left: 20px; color: #fff; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Add Movie">
     </form>
-    <form action="/users">
-        <input type="submit" style="margin-bottom: 20px; margin-left: 20px; color: #fff; background-color: #28a745; border: 2px solid #28a745; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Go back to Users List">
-    </form>
+
+<!-- html code to implement to Go back to favourite movies movie-->
+
+   <form action="/users/{{user_id}}">
+
+      <input type="submit" value="Back to Favourite Movies">
+
+  </form>
+
+
 </div>
 
 </body>

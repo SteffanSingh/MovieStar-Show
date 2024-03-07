@@ -5,6 +5,7 @@ from flask import Flask
 
 
 
+
 db = SQLAlchemy()
 
 user_movie_association = db.Table(
@@ -19,6 +20,7 @@ class User(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
+    #movie_id = db.Column('id', db.Integer, db.ForeignKey('users.id')),
     movie = relationship('Movie', backref='users', secondary=user_movie_association  )
 
     def __repr__(self):

@@ -1,13 +1,15 @@
 from data_managers.data_manager_interface_json import SQLiteDataManager
 from flask import Flask,  render_template, request,redirect,url_for,flash
-from MovieWeb_app.data_managers.data_models import  User, Movie,db, Review
+from data_managers.data_models import  User, Movie,db, Review
 import  requests, json
 import os
 from flask_sqlalchemy import  SQLAlchemy
 from sqlalchemy.orm import declarative_base, sessionmaker,joinedload
 #movie_data = "data/data.json"
-from sqlalchemy import create_engine
-from flask_login import current_user
+from sqlalchemy import create_engine, or_
+from pprint import  pprint
+from flask_paginate import Pagination
+
 from api import api
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -56,21 +58,27 @@ def user_movie_list(user_id):
     #user_movies =  session.query(User, Movie).join(Movie, Movie.movie.id == user_id).all()
     user = session.query(User).get(user_id)
 
-    #for movie in users_movies:
-
-    #user_movies = Movie.query.filter_by(user_id=user_id).all()
-    #users_list =  User.query.all()
-
-    #user_id_list = [user.id for user in users_list]
-
-    #index = user_id_list.index(user_id)
-    #user = session.query(User).filter(User.id == user_id).first()
-    user_movies = user.movie
+    user_movies = user.movies
     user_name = user.name if user else "Unknown"
-    if not user:
-        # User not found, return a 404 error page
-        return render_template("user_not_found.html"), 404
+    #page = request.args.get('page', 1, type=int)
+    #per_page = 5  # Number of items per page
+
+
+    # Execute the query and apply pagination
+
+    #user_movies_query = Movie.query.filter(Movie.users.any(id=user_id))  # Get the query for user's movies
+    #user_movies_paginated = user_movies_query.paginate(page=page, per_page=per_page)
+
+    #user_movies =  Movie.query.filter(Movie.users.any(id=user_id)).paginate(page=page,per_page=per_page)
+
+
+    #filtered_movies = user_movies.paginate(page=page, per_page=per_page)
+
+
+
+
     return render_template("favourite_movie.html", user_name = user_name, movies = user_movies, user_id = user_id)
+
 
 
 @app.route("/add_user", methods = ["GET", "POST"])
@@ -83,7 +91,7 @@ def add_user():
             return render_template("users.html")
         else:
             user = User(
-                name= name,
+                name= name.title(),
                 movie=[]
             )
             session.add(user)
@@ -196,6 +204,24 @@ def delete_movie(user_id, movie_id):
 
     return redirect(url_for("user_movie_list", user_id=user_id))
 
+@app.route("/search/<int:user_id>", methods= ["GET", "POST"])
+def search_movie(user_id):
+    """Function to implement the movies on searched keyword:"""
+    user = session.query(User).get(user_id)
+    user_name = user.name
+    if request.method== "POST":
+        keyword= request.form.get("keyword")
+        search_movies_list= session.query(Movie).join(Movie.user).\
+            filter(or_(Movie.movie_name.like(f"%{keyword}%"), Movie.year.like(f"%{keyword}%"), Movie.director.like(f"%{keyword}%"))).all()
+        if search_movies_list:
+
+            return render_template("search_movie.html",user_name=user_name,keyword=keyword, movies=search_movies_list, user_id=user_id)
+        else:
+            return render_template("no_movie_found.html", user_id=user_id)
+
+    user_movie_list = user.movie
+    return render_template("favourite_movie.html", user_name=user_name, movies=user_movie_list, user_id=user_id)
+
 
 @app.route("/add_review/<int:user_id>/<int:movie_id>" , methods=["GET","POST"])
 def add_review(user_id, movie_id):
@@ -259,8 +285,11 @@ def update_review(review_id):
                                   movie_id =  review_to_update.movie_id))
     user_id = review_to_update.user_id
     return render_template("edit_review.html", movie = review_to_update.movie,user_id= user_id,movie_id=review_to_update.movie_id,
-                           review_id= review_to_update.review_id,review = review_to_update)
-     
+                           review_id = review_to_update.review_id, review = review_to_update)
+
+
+
+
 
 
 if __name__ == '__main__':
