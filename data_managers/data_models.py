@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date,Float,ARRAY
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date,Float,ARRAY,Boolean
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship,validates
 from flask import Flask
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -20,15 +21,36 @@ class User(db.Model):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    #movie_id = db.Column('id', db.Integer, db.ForeignKey('users.id')),
-    movie = relationship('Movie', backref='users', secondary=user_movie_association  )
+    email = Column(String, unique=True)
+    password = Column(String)
+    is_admin = Column(Boolean, default=False)  # New column for admin status
+
+    movie = relationship('Movie', backref='users', secondary=user_movie_association)
+
+    @validates('password')
+    def validate_password(self, key, password):
+        return generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return f"user(user id={self.id}, author name = {self.name} )"
+        return f"User(id={self.id}, name={self.name}, email={self.email}, is_admin={self.is_admin})"
 
     def __str__(self):
-        return f"The user is {self.name}  "
+        return f"The user is {self.name}"
 
+    def make_admin(self):
+        self.is_admin = True
+
+    def remove_admin(self):
+        self.is_admin = False
+
+    def promote_to_admin(self):
+        self.is_admin = True
+
+    def demote_from_admin(self):
+        self.is_admin = False
 
 class Movie(db.Model):
     __tablename__ = "movies"

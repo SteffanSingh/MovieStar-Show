@@ -4,26 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> MovieWeb App</title>
-    <link rel="stylesheet" href="static/style.css">
 
+<style>
+body {
+            background-color: #ADD8E6;
+            color: #333;
+            padding: 150px;
+            background-image: url('{{ url_for('static', filename='image/17.jpeg') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+     h1 {
+     margin-top:0;
+        font-size:100px;
+            text-align:center;
+            color: #dc3545;
+        }
+        h1:hover{
+        color:Purple;
+        cursor:pointer;
+        }
+
+        svg:hover{
+        color:magenta;
+        }
+        h3, label{
+            font-size:30px;
+        color:red;
+        }
+
+.admin{
+text-align:center;
+font-size:30px;
+        font-weight:2rem;
+        color: Magenta;
+        margin-left:400px;
+        border-radius:10px;
+       padding:10px 20px;
+margin-top:0;
+        background-color:pink;
+        cursor:pointer;
+        border:none;
+}
+
+</style>
 </head>
 <body >
-      <h1 style="text-align:center; color: #dc3545;">MovieWeb App</h1>
+      <h1>MovieStar
+               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg></h1>
 
 
 
 
-<h3>Users:</h3>
+
 
     <form action="/add_user" method="POST">
 
-        <label for="name">Name:</label>
+        <label for="name">User Name:</label>
 
         <input type="text" placeholder="Enter the name" id="name" name="name" required>
+        <label for="email">User Email:</label>
 
-        <input type="submit" value="Submit">
+        <input type="email" placeholder="Enter the Email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+
+        <input type="password" placeholder="Enter the Password" id="password" name="password" required>
+
+        <input type="submit" style="margin: 20px; margin-left: 20px; color: red; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Add User">
+
     </form>
 
+        <form action="/users">
+                <input type="Submit" value="Go back to Users"    class="admin">
+
+        </form>
 
 
 

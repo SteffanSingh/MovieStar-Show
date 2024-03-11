@@ -5,10 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieWeb App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<style>
+body {
+            background-color: #ADD8E6;
+            color: #333;
+            padding: 10px;
+            background-image: url('{{ url_for('static', filename='image/17.jpeg') }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            margin-bottom:120px;
+        }
+    #star-blink{
+text-align:center;
+color:magenta;
+font-size:30px;
+margin-bottom:0;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#star-blink {
+  animation: blink 5s infinite;
+  color:magenta;
+}
+     h1 {
+     margin-top:0;
+        font-size:40px;
+            text-align:center;
+            color: #dc3545;
+        }
+        h1:hover{
+        color:Purple;
+        cursor:pointer;
+        }
+
+        svg:hover{
+        color:magenta;
+        }
+
+</style>
+
 </head>
 <body style="background-color:#ADD8E6; color: #333; padding: 20px; font-family: Arial, sans-serif;">
 
-<h1 style="text-align:center; color: #dc3545;">MovieWeb App</h1>
+ <h1>MovieStar
+               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="40" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg></h1>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert"  id="star-blink"  >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
 <div style="display:flex; justify-content:space-between">
 <h3 style="  color: #dc3545;"><mark>{{user_name}}</mark>'s Favorite Movies</h3>
@@ -20,11 +79,17 @@
          padding: 5px; cursor: pointer;
          transition: background-color 0.3s, border-color 0.3s;" value="Sort the movie list">
     </form>
-
+<form action="/users/{{user_id}}/add_movie">
+        <input type="submit" style="margin-bottom: 20px;
+        margin-left: 20px; color: #fff;
+        background-color: #ff69b4; border: 2px solid #ff69b4;
+         border-radius: 5px; padding: 10px; cursor: pointer;
+          transition: background-color 0.3s, border-color 0.3s;" value="Add Movie">
+    </form>
 <form method="POST" action="/search/{{user_id}}" style="margin-bottom:15px">
         <em> <strong>
 
-            <label for="keyword">Enter Keyword for Search Movie:</label>
+            <label for="keyword" style="color:red;">Enter Keyword for Search Movie:</label>
 
         </strong> </em>
 
@@ -38,6 +103,7 @@
 
 
     </form>
+
 </div>
 
 <div style="display: flex; justify-content: center; margin-bottom: 40px;">
@@ -97,6 +163,7 @@
                 </form>
             </div>
         </div>
+
         {% endfor %}
     </ul>
 </div>
@@ -115,18 +182,16 @@
 
 
 
-
 <div style="display: flex; justify-content: center;">
-    <form action="/users/{{user_id}}/add_movie">
-        <input type="submit" style="margin-bottom: 20px; margin-left: 20px; color: #fff; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;" value="Add Movie">
-    </form>
-    <form action="/users">
-        <input type="submit" style="margin-bottom: 20px;
-        margin-left: 20px; color: #fff; background-color: #28a745;
-         border: 2px solid #28a745; border-radius: 5px;
-         padding: 10px; cursor: pointer;
-         transition: background-color 0.3s, border-color 0.3s;" value="Go back to Users List">
-    </form>
+     <form action="/">
+            <input type="Submit" value="Go Back to Home Page " style="margin-bottom: 20px; margin-left: 20px; color: red; background-color: #fff; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;"  class="home">
+
+        </form>
+    <a id="login" href="/login" style="margin-bottom: 20px; margin-left: 20px; color: red; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Sign out </a>
+    {% if is_admin %}
+    <a href="/users" style="margin-bottom: 20px; margin-left: 20px; color: red; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go back to users</a>
+    {% endif %}
+
 </div>
 
 </body>

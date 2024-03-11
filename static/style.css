@@ -9,9 +9,19 @@ input{
     margin-bottom:20px;
                   margin-left:20px;color: red; border-radius:10px;padding:5px;
 }
-h1{
-text-align:center;
+h1 {
+
+            color: #dc3545;
+        }
+
+h1:hover{
+        color:Purple;
+        cursor:pointer;
 }
+svg:hover{
+        color:magenta;
+
+        }
 
 img{
 
@@ -28,3 +38,5 @@ cursor:pointer;
 
 ol{
  display:flex;flex-wrap:wrap;justify-content:space-between;
+ }
+

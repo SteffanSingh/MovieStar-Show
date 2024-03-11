@@ -4,20 +4,190 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> MovieWeb App</title>
-    <link rel="stylesheet" href="static/style.css">
+<style>
+body {
+    /* Use the image as the background */
+    background-image: url('{{ url_for('static', filename='image/11.jpeg') }}'); /* Adjusted path using url_for */
+    /* Set background size to cover the entire body */
+    background-size: cover;
+    /* Set background repeat to no repeat */
+    background-repeat: no-repeat;
+    /* Center the background horizontally and vertically */
+    background-position: center center;
+    background-color:#333;
+}
 
+        h1{
+        font-size:80px;
+
+        text-align:center;
+        color:red;
+        line-height:1;
+        margin-top: 0;
+        margin-bottom:0;
+        }
+
+    h1:hover{
+        color:Purple;
+        cursor:pointer;
+        }
+
+        svg:hover{
+        color:magenta;
+
+        }
+
+        h2{
+
+        text-align:center;
+        font-size:80px;
+        color:blue;
+        margin-top: 0;
+        margin-bottom: 0;
+        }
+
+h2:hover{
+        color:red;
+        cursor:pointer;
+}
+h3:hover{
+        color:red;
+        cursor:pointer;
+}
+        h3{
+        color:magenta;
+        font-size:50px;
+        text-align:center;
+         margin-top: 0;
+ margin-bottom: 0;
+
+        }
+         .sliding-image {
+            width: 110px; /* Adjust width as needed */
+            height: 110px; /* Maintain aspect ratio */
+            transition: transform 0.5s ease; /* Transition for smooth sliding effect */
+            cursor:pointer;
+        }
+
+        .sliding-image:hover {
+            transform: translateX(50px); /* Move the image 100px to the right on hover */
+        }
+
+        .signup{
+        margin-left:550px;
+        color: red;
+        font-size:30px;
+        border-radius:10px;
+        padding:3px 10px;
+        background-color:pink;
+        cursor:pointer;
+        }
+
+p{
+text-align:center;
+color:red;
+font-size:30px;
+}
+.admin:hover{
+color:red;
+}
+
+.admin{
+text-align:center;
+font-size:20px;
+        font-weight:10rem;
+        color: yellow;
+        margin-left:560px;
+        border-radius:10px;
+       padding:5px 10px;
+margin-top:0;
+        background-color:pink;
+        cursor:pointer;
+        border:none;
+}
+
+.signin{
+        text-align:center;
+        font-weight:2rem;
+        color: red;
+        font-size:20px;
+        border-radius:10px;
+       padding:5px 10px;
+
+        background-color:pink;
+        cursor:pointer;
+        border:none;
+        margin-bottom:0;
+}
+.signin:hover{
+color:magenta;
+}
+.signup:hover {
+color:blue
+}
+</style>
 </head>
 <body  >
 
 
-      <h1 style="text-align:center; color: #dc3545;">Welcome to MovieWeb  App</h1>
+            <h2> Welcome to</h2>
+    <h1> MovieStar
+               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="80" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+</svg></h1>
+                <h3>Show</h3>
 
-        <form action="/users">
 
-            <input type="Submit" value="Go to Users Page">
+            <div class="sliding-image-container">
+                <a href="/login">
+        <img src="{{ url_for('static', filename='image/1.jpeg') }}" alt="Sliding Image" class="sliding-image"  >
+
+                </a>
+                <a href="/login">
+                <img src="{{ url_for('static', filename='image/2.jpg') }}" alt="Sliding Image" class="sliding-image">
+                </a>
+          <a href="/login">
+                       <img src="{{ url_for('static', filename='image/3.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a>******
+                <a href="/login">
+                               <img src="{{ url_for('static', filename='image/4.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a><a href="/login">
+                       <img src="{{ url_for('static', filename='image/5.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a><a href="/login">
+                       <img src="{{ url_for('static', filename='image/6.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a><a href="/login">
+                       <img src="{{ url_for('static', filename='image/7.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a><a href="/login">
+                       <img src="{{ url_for('static', filename='image/8.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a><a href="/login">
+                       <img src="{{ url_for('static', filename='image/9.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a>
+                 <a href="/login">
+                       <img src="{{ url_for('static', filename='image/10.jpeg') }}" alt="Sliding Image" class="sliding-image">
+                </a>
+
+                <form action="/signup" >
+                <h3>Watch movies</h3>
+
+            <input type="Submit" value="SignUp " style="text-align:center;"  class="signup">
+        </form>
+
+                 <form action="/login">
+                <p>Have an account ?
+            <input type="Submit" value="Login " style="text-align:center;"  class="signin">
+                </p>
+
+
         </form>
 
 
+
+    </div>
+
+<form action="/users">
+                <input type="Submit" value="Admin View"   class="admin">
+
+        </form>
 
 
 </body>

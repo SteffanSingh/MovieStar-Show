@@ -64,3 +64,9 @@ def add_user_movie(user_id):
     else:
         return jsonify({'error': 'User not found'}), 404
 
+
+if __name__ == '__main__':
+    #with app.app_context():
+     # db.create_all()
+    api.run(debug=True, port=5002)
+
