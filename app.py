@@ -94,6 +94,12 @@ def add_user():
         password = request.form["password"]
         if name == None:
             return render_template("users.html")
+        elif len(password) < 6:
+            flash("Password should have minimum 6 characters.")
+            return redirect(url_for("add_user"))
+        elif email in [user.email for user in session.query(User).order_by(User.email)]:
+            flash("Email has already been registered ! Please enter different email.")
+            return redirect(url_for("add_user"))
         else:
             user = User(
                 name= name.title(),
@@ -266,7 +272,7 @@ def add_review(user_id, movie_id):
 
         new_review = Review(
                     review_text = review if review else None,
-                    rating = float(rating) if rating else None,
+                    rating = float(rating) if rating else 0,
                     user = user,
                     movie = movie_to_review
                 )
@@ -360,7 +366,9 @@ def signup():
         if existing_user:
             flash("Email address is already in use. Please choose another.")
             return redirect(url_for("signup"))
-
+        if len(password)<6:
+            flash("Password should have minimum 6 characters !")
+            return redirect(url_for("signup"))
         if email and password:
 
             user= User(
@@ -418,6 +426,9 @@ def resetPassword():
         if email == "" or password=="":
             flash("Email and password cant be blank!")
             return redirect(url_for("resetPassword"))
+        if len(password) < 6:
+            flash("Password should have minimum 6 characters !")
+            return redirect(url_for("resetPassword"))
         if email in emails:
             user = session.query(User).filter_by(email=email).first()
             user.password = password
@@ -425,7 +436,7 @@ def resetPassword():
             flash("Reset Password successful")
             return redirect(url_for("signin"))
         else:
-            flash("Email is not registered! Please Register.")
+            flash("Email is not registered yet ! Please Register.")
             return redirect(url_for("signup"))
 
     return  render_template("forgot_password.html")

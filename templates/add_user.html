@@ -9,7 +9,7 @@
 body {
             background-color: #ADD8E6;
             color: #333;
-            padding: 150px;
+
             background-image: url('{{ url_for('static', filename='image/17.jpeg') }}');
             background-size: cover;
             background-repeat: no-repeat;
@@ -48,6 +48,23 @@ margin-top:0;
         border:none;
 }
 
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#star-blink {
+text-align:center;
+font-size:25px;
+  animation: blink 5s infinite;
+  color:yellow;
+}
+        h2 {
+            text-align: center;
+            color: yellow;
+            font-size: 30px;
+        }
 </style>
 </head>
 <body >
@@ -59,7 +76,16 @@ margin-top:0;
 
 
 
-
+    <h2>Admin Page</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert" id="star-blink"  >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
     <form action="/add_user" method="POST">
 
