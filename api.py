@@ -16,7 +16,11 @@ def get_users():
     users = session.query(User).all()
     print(users)
 
-    user_list = [{"id":user.id, 'name':user.name} for user in users ]
+    user_list = [{"id":user.id, 'name':user.name,
+                  "email":user.email,
+                  "password":user.password,
+                  "is_admin":user.is_admin
+                  } for user in users ]
     print(user_list)
     return user_list
 
