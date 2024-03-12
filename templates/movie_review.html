@@ -23,6 +23,17 @@
         color:magenta;
         }
 
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#star-blink {
+  animation: blink 5s infinite;
+  color:red;
+  font-size:30px;
+}
 </style>
 </head>
 <body style="background-color:#ADD8E6; color: #333; padding: 10px; ">
@@ -89,6 +100,16 @@
 
 <form action="/add_review/{{user_id}}/{{movie.movie_id}}" method="POST">
         <div style="display:flex; justify-content:center;flex-direction:column; " >
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert" id="star-blink"  >
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}
             <label style="margin-top:20px;">Write your Review:</label>
 
     <textarea style="margin-top:20px;" rows="10" cols="40" placeholder="Enter your review" name="review"></textarea>

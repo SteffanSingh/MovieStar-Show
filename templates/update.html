@@ -17,6 +17,7 @@ body {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
+            margin-bottom:200px;
         }
      h1 {
      margin-top:0;
@@ -32,6 +33,21 @@ body {
         svg:hover{
         color:magenta;
         }
+h2{
+color:red;
+font-size:30px;
+}
+label{
+font-size:30px;
+
+color:red;
+}
+
+input{
+margin-right:40px;
+padding:5px;
+}
+
 
 </style>
 </head>
@@ -43,7 +59,7 @@ body {
 
 
 
-<h2><mark>{{user_name}}</mark> ´s Favourite movies :</h2>
+<h2> <em><strong><mark>{{user_name}}</mark> ´s movie</strong> </em> <mark>{{movie_name}}</mark>   Update :</h2>
 
             <form action="/users/{{user_id}}/update_movie/{{movie_id}}" method="POST"  >
 
@@ -53,13 +69,32 @@ body {
              <label> Enter a new note:</label>
              <input name="note" type="text" placeholder="New note">
 
-             <input type="Submit" value="Update" >
+             <input type="Submit" style="margin-bottom: 20px;
+        margin-left: 50px; color: red;
+        background-color: #ff69b4; border: 2px solid #ff69b4;
+         border-radius: 5px; padding: 10px; cursor: pointer;
+          transition: background-color 0.3s, border-color 0.3s;" value="Update" >
             </form>
-            <a id="login" href="/login" style="margin-bottom: 20px;
+
+
+ <div style="display:flex;   ">
+
+
+
+
+
+
+        <button style="margin-bottom: 20px; margin-left: 20px;
+        color: red; border-radius: 10px; padding: 10px; text-decoration: none;
+         background-color: lime blue;  ; cursor: pointer;">
+    <a href="/users/{{user_id}}" style="text-decoration: none; color: inherit;">Back to Favourite Movies</a>
+</button>
+
+<a id="login" href="/login" style="margin-bottom: 20px;
         margin-left: 20px; color: red;
         background-color: #ff69b4; border: 2px solid #ff69b4;
          border-radius: 5px; padding: 10px; cursor: pointer;
           transition: background-color 0.3s, border-color 0.3s;">Sign out </a>
-
+ </div>
 </body>
 </html>

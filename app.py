@@ -11,19 +11,19 @@ from sqlalchemy.orm import declarative_base, sessionmaker,joinedload
 from sqlalchemy import create_engine, or_
 from pprint import  pprint
 from flask_paginate import Pagination
-
+from sess import session
 from api import api
 from sqlalchemy.orm.exc import NoResultFound
 
 app = Flask(__name__)
 
-app.secret_key = '123456'
 app.register_blueprint(api, url_prefix='/api')
+app.secret_key = '123456'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-Base = declarative_base()
+"""Base = declarative_base()
 
 #data_file_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'moviwebapp.sqlite')
 
@@ -34,6 +34,7 @@ Base.metadata.create_all(engine)
 # Create a database session
 Session = sessionmaker(bind=engine)
 session = Session()
+"""
 
 data_manager = SQLiteDataManager(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///moviewebapp.sqlite'
@@ -127,6 +128,7 @@ def delete_user(user_id):
 def add_user_movie(user_id):
     """Function to implement adding a movie to a particular user with a given user id"""
     user = session.query(User).get(user_id)
+    user_name= user.name
     if not user:
         return render_template("user_not_found.html")
 
@@ -172,7 +174,7 @@ def add_user_movie(user_id):
 
         return redirect(url_for("user_movie_list", user_id=user_id))
 
-    return render_template("add_movie.html", user_id=user_id)
+    return render_template("add_movie.html", user_id=user_id,user_name=user_name)
 
 
 @app.route("/users/<int:user_id>/update_movie/<int:movie_id>", methods=["GET", "POST"])
@@ -189,16 +191,18 @@ def update_movie(user_id, movie_id):
     #movies = data_manager.get_user_movies_name_list(user_id)
     user_movie_list = user.movie
     movie_to_update =  session.query(Movie).get(movie_id)
+    movie_name = movie_to_update.movie_name
+
     if request.method == "POST":
         rating = request.form["rating"]
         note = request.form["note"]
         for index, movie in enumerate(user_movie_list):
             if int(movie.movie_id) == movie_id:
-                movie_to_update.rating = rating if rating else None
-                movie_to_update.note  = note if note else None
+                movie_to_update.rating = rating if rating else 0
+                movie_to_update.note  = note if note else ""
                 session.commit()
                 return render_template("favourite_movie.html", user_name=user_name, user_id=user_id, movie_id = movie_id, movies = user_movie_list)
-    return render_template("update.html", user_name = user_name.title(), movie_id = movie_id, movies = user_movie_list, user_id = user_id)
+    return render_template("update.html",movie_name=movie_name, user_name = user_name.title(), movie_id = movie_id, movies = user_movie_list, user_id = user_id)
 
 
 
@@ -269,7 +273,9 @@ def add_review(user_id, movie_id):
         #user_id = request.headers.get('user_id')
         user = session.query(User).get(user_id)
         movie_to_review = session.query(Movie).get(movie_id)
-
+        if review == "":
+            flash("Please enter your review")
+            return  redirect(url_for("add_review",user_id=user_id,movie_id=movie_id))
         new_review = Review(
                     review_text = review if review else None,
                     rating = float(rating) if rating else 0,
@@ -324,6 +330,9 @@ def update_review(review_id):
         review = request.form.get('review')
         rating = request.form.get('rating')
 
+        if review == "" or review is None:
+            flash("Please enter your review")
+            return  redirect(url_for("update_review",review_id=review_id))
         if review is not None:
             review_to_update.review_text = review
 
@@ -410,6 +419,9 @@ def signin():
             if user and check_password_hash(user.password, password):
                 flash("Login successful ! Welcome to MovieStar Show !")
                 return render_template("favourite_movie.html", user_name=user_name, user_id=id, movies=movies)
+            elif user and not check_password_hash(user.password, password):
+                flash("Passsword is incorrect!Please try again.")
+                return redirect(url_for("signin"))
             else:
                 flash("User email or passsword is incorrect!Please try again.")
                 return redirect(url_for("signin"))
@@ -444,6 +456,5 @@ def resetPassword():
 if __name__ == '__main__':
     #with app.app_context():
      # db.create_all()
-    app.run(debug=True, port=5000)
-
+    app.run(debug=True, host='0.0.0.0', port=5000)
 

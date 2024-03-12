@@ -47,7 +47,7 @@ color:red;
 
 
 
-<h3>Add Movie:</h3>
+<h3>Add Movie for <mark>{{user_name}}</mark>  :</h3>
 
     <form action="/users/{{user_id}}/add_movie" method="POST">
 
@@ -57,8 +57,9 @@ color:red;
 
         <input type="submit" value="Submit">
 
-
     </form>
+
+
 
  <button style="margin:100px;
 
@@ -66,6 +67,7 @@ color:red;
          background-color: lime blue;  ; cursor: pointer;">
     <a href="/users/{{user_id}}" style="text-decoration: none; color: inherit;">Back to Favourite Movies</a>
 </button>
+
 
 
 </body>

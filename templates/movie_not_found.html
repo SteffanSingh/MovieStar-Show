@@ -32,7 +32,23 @@ body {
         color:magenta;
         }
         h2{
-        color:red;}
+        font-size:30px;
+        text-align:center;
+        color:magenta;
+        }
+
+        label
+        {
+        text-align:center;
+        color:red;
+        font-size:30px;
+        margin-left:320px;
+        }
+
+        input{
+        font-size:20px;
+        margin-right:50px;
+        }
 
 </style>
 </head>
@@ -44,13 +60,26 @@ body {
 
 
 
-<h2><mark>{{user_name}}</mark> ´s Favourite movies :</h2>
+<h2><mark>{{user_name}}</mark> ´s Movies  :</h2>
 
-            <h2> Movie is not found.</h2>
+            <h1> Sorrry ! Movie is not found.</h1>
+                <h2>Try again.</h2>
+    <h1>Add Movie:</h1>
+
+    <form action="/users/{{user_id}}/add_movie" method="POST">
+
+        <label for="name">Movie Name:</label>
+
+        <input type="text" PLACEHOLDER="Enter a movie name" name="name" id="name" required>
+
+        <input type="submit" value="Submit">
+
+
+    </form>
 
             <form action="/users/{{user_id}}">
                 <input type="Submit" value="Go back to {{user_name}}´s favourite movies"
-                       style="color:red;border-radius:10px;padding:5px;cursor:pointer;">
+                       style="color:red;border-radius:10px;margin-top:40px; padding:5px;cursor:pointer;">
             </form>
 </body>
 </html>
