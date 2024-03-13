@@ -85,7 +85,8 @@ class Review(db.Model):
     user = relationship('User')
     movie = relationship('Movie')
     def __repr__(self):
-        return f"Review(review id={self.review_id}, user id={self.user_id}, movie id={self.movie_id}, rating={self.rating})"
+        return f"Review(review id={self.review_id}, user id={self.user_id}, movie id={self.movie_id}, rating = {self.rating})"
+
 
 #user= User()
 #print(user)
