@@ -1,7 +1,7 @@
 from logging import exception
-
+import datetime
 from werkzeug.security import check_password_hash
-
+from flask_cors import CORS
 from data_managers.data_manager_interface_json import SQLiteDataManager
 from flask import Flask, render_template, request, redirect, url_for, flash, abort
 from data_managers.data_models import  User, Movie,db, Review
@@ -18,6 +18,7 @@ from api import api
 from sqlalchemy.orm.exc import NoResultFound
 
 app = Flask(__name__)
+CORS(app, origins='http://localhost:3000')
 
 app.register_blueprint(api, url_prefix='/api')
 app.secret_key = '123456'
@@ -85,6 +86,8 @@ def add_user():
             name = request.form['name']
             email = request.form["email"]
             password = request.form["password"]
+
+
             if name == None:
                 return render_template("users.html")
             elif len(password) < 6:
@@ -98,6 +101,7 @@ def add_user():
                     name=name.title(),
                     email=email,
                     password=password,
+
                     movie=[]
                 )
                 session.add(user)
@@ -409,7 +413,8 @@ def signup():
                 user = User(
                     name=name.title(),
                     email=email,
-                    password=password
+                    password=password,
+
                 )
                 session.add(user)
                 session.commit()

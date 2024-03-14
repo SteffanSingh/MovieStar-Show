@@ -1,9 +1,9 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, Date,Float,ARRAY,Boolean
+from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime,Float,ARRAY,Boolean
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship,validates
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from datetime  import  datetime
 
 
 
@@ -24,8 +24,9 @@ class User(db.Model):
     email = Column(String, unique=True)
     password = Column(String)
     is_admin = Column(Boolean, default=False)  # New column for admin status
-
+    createdAt = Column(DateTime, default = datetime.now)
     movie = relationship('Movie', backref='users', secondary=user_movie_association)
+
 
     @validates('password')
     def validate_password(self, key, password):
