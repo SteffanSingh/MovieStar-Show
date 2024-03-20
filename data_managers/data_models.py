@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine, Column, Integer, String, ForeignKey, DateTime,Float,ARRAY,Boolean
-from sqlalchemy.orm import declarative_base, sessionmaker, relationship,validates
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship,validates, relationship, backref
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime  import  datetime

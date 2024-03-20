@@ -17,6 +17,7 @@ from sess import session
 from api import api
 from sqlalchemy.orm.exc import NoResultFound
 
+
 app = Flask(__name__)
 CORS(app, origins='http://localhost:3000')
 
@@ -87,6 +88,8 @@ def add_user():
             email = request.form["email"]
             password = request.form["password"]
 
+            movies = session.query(Movie).all()
+            initial_movie_list = movies[:5]
 
             if name == None:
                 return render_template("users.html")
@@ -102,7 +105,7 @@ def add_user():
                     email=email,
                     password=password,
 
-                    movie=[]
+                    movie=initial_movie_list if initial_movie_list else []
                 )
                 session.add(user)
                 session.commit()
@@ -113,17 +116,32 @@ def add_user():
         return render_template("tryAgain.html", error = error)
 
 
-@app.route("/delete_user/<int:user_id>", methods=["GET","DELETE"])
+
+@app.route("/delete_user/<int:user_id>", methods=["GET", "DELETE"])
 def delete_user(user_id):
     """function to implement to delete user from a given user list."""
 
-    try:
-        session.query(User).filter(User.id == user_id).delete()
-        session.commit()
+
+    try :
+        user = session.query(User).get(user_id)
+
+        if user:
+            # Retrieve the IDs of the movies associated with the user
+            movie_ids = [movie.movie_id for movie in user.movies]
+
+            # Delete the movies associated with the user
+            for movie_id in movie_ids:
+                session.query(Movie).filter(Movie.movie_id == movie_id).delete()
+
+            # Delete the user
+            session.delete(user)
+
+            # Commit the changes to the database
+            session.commit()
         return redirect(url_for("list_users"))
+
     except Exception as error:
         return render_template("tryAgain.html", error = error)
-
 
 
 @app.route("/users/<int:user_id>/add_movie", methods=["GET", "POST"])
@@ -408,14 +426,19 @@ def signup():
             if len(password) < 6:
                 flash("Password should have minimum 6 characters !")
                 return redirect(url_for("signup"))
+            movies = session.query(Movie).all()
+            initial_movie_list = movies[:5]
+
             if email and password:
 
                 user = User(
-                    name=name.title(),
-                    email=email,
-                    password=password,
+                    name = name.title(),
+                    email = email,
+                    password = password,
+                    movie = initial_movie_list if initial_movie_list else  []
 
                 )
+
                 session.add(user)
                 session.commit()
                 flash('Signup successful! You can now sign in.')
@@ -499,4 +522,7 @@ if __name__ == '__main__':
     #with app.app_context():
      # db.create_all()
     app.run(debug=True, host='0.0.0.0', port=5002)
+
+
+
 

@@ -10,6 +10,7 @@ from datetime import  datetime
 from werkzeug.security import check_password_hash
 
 
+
 #secret key for creating token in jwt
 SECRET_KEY = "123456"
 
@@ -28,7 +29,7 @@ def get_users():
                   "is_admin":user.is_admin
                   } for user in users ]
     print(user_list)
-    return user_list
+    return jsonify(user_list)
 
 
 @api.route('/users/<int:user_id>/movies', methods=['GET'])
@@ -151,15 +152,12 @@ def signin():
         data = request.json
         email = data["email"]
         password = data["password"]
-
         if not email or not password:
             return jsonify({"message": "Email and password cannot be blank"}), 400
 
         user = session.query(User).filter_by(email=email).first()
-
         if not user:
             return jsonify({"message": "Email is not registered yet. Please register."}), 400
-
 
         # Here you can return the user details as a JSON response if needed
         user_json = {
