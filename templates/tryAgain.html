@@ -61,6 +61,18 @@
         font-size:20px;
         }
 
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#star-blink {
+text-align:center;
+font-size:40px;
+  animation: blink 20s infinite;
+  color:magenta;
+}
     </style>
 </head>
 <body style="display: grid; background-color: #ADD8E6;">
@@ -70,10 +82,19 @@
         </svg>
     </h1>
 
-    <h2>Something went wrong ! Run the code Again.  </h2>
-    <p>The error is {{error}} </p>
-
+    <h2>Something went wrong !Try Again.  </h2>
+                {{error}}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert"  id="star-blink"  >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
     <form action="/">
+
         <input type="Submit" value="Go back to Home" style="color: red; border-radius: 10px; padding: 5px; cursor: pointer;">
     </form>
 

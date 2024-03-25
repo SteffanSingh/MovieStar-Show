@@ -4,7 +4,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker, relationship,validate
 from flask import Flask
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime  import  datetime
-
+from flask_login import UserMixin
 
 
 db = SQLAlchemy()
@@ -16,7 +16,7 @@ user_movie_association = db.Table(
 
 )
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -25,6 +25,7 @@ class User(db.Model):
     password = Column(String)
     is_admin = Column(Boolean, default=False)  # New column for admin status
     createdAt = Column(DateTime, default = datetime.now)
+    profile_image = Column(String)
     movie = relationship('Movie', backref='users', secondary=user_movie_association)
 
 
@@ -47,11 +48,6 @@ class User(db.Model):
     def remove_admin(self):
         self.is_admin = False
 
-    def promote_to_admin(self):
-        self.is_admin = True
-
-    def demote_from_admin(self):
-        self.is_admin = False
 
 class Movie(db.Model):
     __tablename__ = "movies"
@@ -85,9 +81,12 @@ class Review(db.Model):
     rating = Column(Float)
     user = relationship('User')
     movie = relationship('Movie')
+
     def __repr__(self):
         return f"Review(review id={self.review_id}, user id={self.user_id}, movie id={self.movie_id}, rating = {self.rating})"
 
+    def __str__(self):
+        return f"Review(movie id={self.movie_id}, user id={self.user_id}, rating = {self.rating})"
 
 #user= User()
 #print(user)

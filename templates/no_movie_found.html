@@ -64,15 +64,15 @@
         </svg>
     </h1>
 
-    <h2>Oops! No Movie is found in <mark>{{ user_name }}´s</mark> favourite movies list!</h2>
+    <h2>Oops! No Movie is found in <mark>{{ user_dict.user_name }}´s</mark> favourite movies list!</h2>
 
 
-    <form action="/users/{{ user_id }}">
+    <form action="/users/{{ user_dict.user_id }}">
         <input type="Submit" value="Go back to  {{ user_name }}´s favourite movies" style="color: red; border-radius: 10px; padding: 5px; cursor: pointer;">
     </form>
 
     <div style="display: flex; justify-content: center;">
-        <a id="login" href="/login">Sign out</a>
+        <a id="login" href="/logout">Sign out</a>
     </div>
 </body>
 </html>

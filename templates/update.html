@@ -59,9 +59,9 @@ padding:5px;
 
 
 
-<h2> <em><strong><mark>{{user_name}}</mark> ´s movie</strong> </em> <mark>{{movie_name}}</mark>   Update :</h2>
+<h2> <em><strong><mark>{{user_dict.user_name}}</mark> ´s movie</strong> </em> <mark>{{movie_name}}</mark>   Update :</h2>
 
-            <form action="/users/{{user_id}}/update_movie/{{movie_id}}" method="POST"  >
+            <form action="/users/{{user_dict.user_id}}/update_movie/{{user_dict.movie_id}}" method="POST"  >
 
              <label>Enter a new rating:</label>
              <input name="rating" type="number" placeholder="New rating">
@@ -87,10 +87,10 @@ padding:5px;
         <button style="margin-bottom: 20px; margin-left: 20px;
         color: red; border-radius: 10px; padding: 10px; text-decoration: none;
          background-color: lime blue;  ; cursor: pointer;">
-    <a href="/users/{{user_id}}" style="text-decoration: none; color: inherit;">Back to Favourite Movies</a>
+    <a href="/users/{{user_dict.user_id}}" style="text-decoration: none; color: inherit;">Back to Favourite Movies</a>
 </button>
 
-<a id="login" href="/login" style="margin-bottom: 20px;
+<a id="login" href="/logout" style="margin-bottom: 20px;
         margin-left: 20px; color: red;
         background-color: #ff69b4; border: 2px solid #ff69b4;
          border-radius: 5px; padding: 10px; cursor: pointer;

@@ -125,10 +125,31 @@ color:magenta;
 .signup:hover {
 color:blue
 }
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#star-blink {
+text-align:center;
+font-size:40px;
+  animation: blink 7s infinite;
+  color:magenta;
+}
 </style>
 </head>
 <body  >
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert"  id="star-blink"  >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
 
             <h2> Welcome To</h2>
     <h1> MovieStar

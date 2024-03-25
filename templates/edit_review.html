@@ -96,7 +96,7 @@
 
 <div  style="margin-right:30px; "   >
 
-<form action="/update/{{review_id}}" method="POST">
+<form action="/update/{{review.review_id}}" method="POST">
         <div style="display:flex; justify-content:center;flex-direction:column; " >
 
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -108,13 +108,13 @@
         {% endfor %}
     {% endif %}
 {% endwith %}
-            <label style="margin-top:20px;">Write your Review:</label>
+            <label style="margin-top:20px;">Edit your Review:</label>
 
     <textarea style="margin-top:20px;" rows="10" cols="40" placeholder="" name="review">{{review.review_text}}</textarea>
 
             <label style="margin-top:20px;">Enter your rating:</label>
 
-             <input name="rating" type="number" placeholder="Enter your rating" style="margin-top:10px;" >
+             <input name="rating" type="number" step="0.1" placeholder="Enter your rating" style="margin-top:10px;" >
 
      <input style="margin-bottom:40px;margin-top:40px;
                   margin-left:20px;color:blue;background-color:light blue; border-radius:10px;cursor:pointer;
@@ -129,44 +129,16 @@
 
     </div>
 
-        <div class="review">
-            {% if reviews %}
-            {% for index in range(reviews|length) %}
-    {% set review = reviews[index] %}
-    <p style="font-size:20px;color:lime blue;">{{ index + 1 }}. {{ review.review_text }}</p>
-            <h4 style="font-size:20px;color:red;" > {{review.rating}}* </h4>
-
-    <div style="display:flex; justify-content:center;">
-
-        <form action="/update/{{review.review_id}}">
-            <input style="margin-bottom:20px; cursor:pointer;
-            margin-left:20px; color:Magenta; border-radius:10px; padding:5px;"
-                   type="Submit" value="Update Review">
-        </form>
-
-    </div>
-{% endfor %}
-{% endif %}
-
-
-
-</div>
-
         </div>
-
-
-
-
-
 
 
        <button style="margin-bottom: 20px; margin-left: 20px; color: red; border-radius: 10px;
        padding: 10px; text-decoration: none; background-color: light grey;
          text-align:center;cursor: pointer;">
-    <a href="/add_review/{{user_id}}/{{movie.movie_id}}" style="text-decoration: none; color: inherit;">Back to Review Page</a>
+    <a href="/add_review/{{review.user_id}}/{{review.movie_id}}" style="text-decoration: none; color: inherit;">Back to Review Page</a>
 
 </button>
-<a id="login" href="/login" style="margin-bottom: 20px;
+<a id="login" href="/logout" style="margin-bottom: 20px;
         margin-left: 20px; color: red;
         background-color: #ff69b4; border: 2px solid #ff69b4;
          border-radius: 5px; padding: 10px; cursor: pointer;
