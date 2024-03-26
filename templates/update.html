@@ -64,7 +64,7 @@ padding:5px;
             <form action="/users/{{user_dict.user_id}}/update_movie/{{user_dict.movie_id}}" method="POST"  >
 
              <label>Enter a new rating:</label>
-             <input name="rating" type="number" placeholder="New rating">
+             <input name="rating" type="number" step="0.1" placeholder="New rating">
 
              <label> Enter a new note:</label>
              <input name="note" type="text" placeholder="New note">

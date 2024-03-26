@@ -153,7 +153,11 @@ body {
 
 <div style="display: flex; justify-content: center;">
      <form action="/">
-            <input type="Submit" value="Go Back to Home Page " style="margin-bottom: 20px; margin-left: 20px; color: red; background-color: #fff; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;"  class="home">
+            <input type="Submit" value="Go Back to Home Page "
+                   style="margin-bottom: 20px; margin-left: 20px; color: red;
+                    background-color: #fff; border: 2px solid #ff69b4;
+                    border-radius: 5px; padding: 10px; cursor: pointer;
+                    transition: background-color 0.3s, border-color 0.3s;"  class="home">
 
         </form>
 
@@ -164,7 +168,14 @@ body {
     </form>
 
     {% if current_user.is_admin %}
-    <a href="/users" style="margin-bottom: 20px; margin-left: 20px; color: red; background-color: #ff69b4; border: 2px solid #ff69b4; border-radius: 5px; padding: 10px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Go back to users</a>
+    <form action="/users">
+            <input type="Submit" value="All Users Page "
+                   style="margin-bottom: 20px; margin-left: 20px; color: red;
+                    background-color: #fff; border: 2px solid #ff69b4;
+                    border-radius: 5px; padding: 10px; cursor: pointer;
+                    transition: background-color 0.3s, border-color 0.3s;"  class="home">
+
+        </form>
     {% endif %}
 
 </div>
