@@ -1,7 +1,7 @@
 # MovieStar Show
 
 ## A movie web app, where user can signup, signin, reset password for authenticaiton. Users can add , delete, edit movies and reviews for a particular movie.
-  * It is a server-side-rendering project with major associated backend apis.
+  * It is a server-side-rendering project.
   * Searching movie by movie name, rating, released year, director.
   * Sort the movies for a particular user, by rating, movie name, year. 
     
