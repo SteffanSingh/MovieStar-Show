@@ -10,6 +10,7 @@ from flask_cors import  CORS
 
 app.register_blueprint(api, url_prefix='/api')
 CORS(app, origins='http://localhost:3000')
+
 @app.route('/')
 def home():
     """Function to implement home page of Movie web app"""
@@ -86,12 +87,10 @@ def delete_user(user_id):
     try:
         user = data_manager.get_user(user_id)
         if not user:
-            return "User not found", 404
-        if user:
-            data_manager.delete_user(user_id)
+            return render_template("tryAgain.html", error="User not found")
+        data_manager.delete_user(user_id)
         return redirect(url_for("list_users"))
     except Exception as error:
-        session.rollback()
         return render_template("tryAgain.html", error=error)
 
 

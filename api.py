@@ -60,19 +60,16 @@ def add_user_movie(user_id):
     user = data_manager.get_user(user_id)
     if not user:
         return jsonify({'error': 'User not found'}), 404
-    for movie in user.movies:
-        if movie.movie_name == response_data["Title"]:
-            return jsonify({'message': 'Movie already exists in user movie list.'}), 200
     if response_data['Response'] == "False":
         return jsonify({'message': 'Movie is not found.'}), 200
     existing_movie = data_manager.movie_exist_or_not(response_data["Title"])
     if existing_movie:
-        if existing_movie not in user.movies:
+        if existing_movie not in user.movie:
             user.movie.append(existing_movie)
             data_manager.commit_change()  # Commit the session after appending the existing movie
             return jsonify({'message': 'Movie added successfully'}), 201
         else:
-            return jsonify({'message': 'Movie already exists in user movie list.'}), 200
+            return jsonify({'message': 'Movie already exists in user movie lists.'}), 200
     new_movie = Movie(
         movie_name=response_data["Title"],
         director=response_data["Director"],

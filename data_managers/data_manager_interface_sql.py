@@ -4,7 +4,7 @@ from .data_manager_interface import DataManagerInterface
 from sqlalchemy import create_engine, or_
 from sqlalchemy.orm import declarative_base, sessionmaker
 from flask import  Flask
-from data_managers.data_models import User, Movie, Review
+from data_managers.data_models import User, Movie, Review,user_movie_association
 from .data_models import  db
 from flask_sqlalchemy import SQLAlchemy
 
@@ -48,9 +48,14 @@ class SQLiteDataManager(DataManagerInterface):
         db.session.commit()
 
     def delete_user(self, user_id):
-        user= db.session.query(User).get(user_id)
-        db.session.delete(user)
-        db.session.commit()
+        try:
+            user = db.session.query(User).get(user_id)
+            db.session.query(user_movie_association).filter_by(id=user_id).delete()
+            db.session.delete(user)
+            db.session.commit()
+        except Exception as error:
+            db.session.rollback()
+            return  error
 
     def get_user(self, user_id):
         user= db.session.query(User).get(user_id)
