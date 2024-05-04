@@ -6,6 +6,8 @@ from main import app, data_manager
 from reusable_functions.movie_fetch import movie_fetch
 from api import api
 from flask_cors import  CORS
+import asynchat
+import asyncore
 
 
 app.register_blueprint(api, url_prefix='/api')
