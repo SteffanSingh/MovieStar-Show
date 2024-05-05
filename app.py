@@ -14,7 +14,7 @@ import re
 from flask_cors import  CORS
 import asynchat
 import asyncore
- 
+
 
 app.register_blueprint(api, url_prefix='/api')
 CORS(app, origins='http://localhost:3000')
