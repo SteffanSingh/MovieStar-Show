@@ -1,6 +1,6 @@
 from flask import  Flask, request, flash,render_template, redirect,url_for,Blueprint
 from data_managers.data_manager_interface_sql import session,SQLiteDataManager,database
-from data_managers.data_models import User,Movie
+from data_managers.data_models import User, Movie
 from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from sqlalchemy.orm.exc import NoResultFound

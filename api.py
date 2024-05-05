@@ -69,7 +69,7 @@ def add_user_movie(user_id):
             data_manager.commit_change()  # Commit the session after appending the existing movie
             return jsonify({'message': 'Movie added successfully'}), 201
         else:
-            return jsonify({'message': 'Movie already exists in user movie lists.'}), 200
+            return jsonify({'message': 'Movie already exists in user movies lists.'}), 200
     new_movie = Movie(
         movie_name=response_data["Title"],
         director=response_data["Director"],

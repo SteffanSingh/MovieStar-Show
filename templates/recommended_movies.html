@@ -40,61 +40,12 @@ body {
 {% endwith %}
 
 <div style="display:flex; justify-content:space-between">
-<h3 style="  color: #dc3545;"><mark>{{user_dict.user_name}}</mark>'s Movies</h3>
-
-    <form id="sort-form" action="/sort/{{user_dict.user_id}}">
-    <label for="sort_by" style="color: Yellow; border-radius: 10px; border:none; padding: 5px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">Sort Movies By:</label>
-    <select name="sort_by" id="sort_by" style="color: blue; border-radius: 10px; border:none; padding: 5px; cursor: pointer; transition: background-color 0.3s, border-color 0.3s;">
-        <option value="name" {% if user_dict.sort_by == 'name' %}selected{% endif %}>Movie Name</option>
-        <option value="rating" {% if user_dict.sort_by == 'rating' %}selected{% endif %}>Rating</option>
-        <option value="year" {% if user_dict.sort_by == 'year' %}selected{% endif %}>Year</option>
-    </select>
- <input type="submit" style="
-          color: green;
-           border-radius: 10px;border:none;
-         padding: 5px; cursor: pointer;
-         transition: background-color 0.3s, border-color 0.3s;" value="Sort ">
-</form>
-
-
-<form action="/users/{{user_dict.user_id}}/add_movie">
-        <input type="submit" style="margin-bottom: 20px;
-        margin-left: 20px; color: #fff;
-        background-color: #ff69b4; border: 2px solid #ff69b4;
-         border-radius: 5px; padding: 10px; cursor: pointer;
-          transition: background-color 0.3s, border-color 0.3s;" value="Add Movie">
-    </form>
-
-
-<form method="POST" action="/search/{{user_dict.user_id}}" style="margin-bottom:15px">
-        <em> <strong>
-
-            <label for="keyword" style="color:red;">Search Movie:</label>
-
-        </strong> </em>
-
-
-            <input type="text" id="keyword" name="keyword" required>
-
-        <input type="submit" style="
-          color: #fff; background-color: #28a745;
-         border: 2px solid #28a745; border-radius: 5px;
-         padding: 5px; cursor: pointer;" value="Search">
-
-
-    </form><br>
-
-    <div><form  action="/recommended/{{user_dict.user_id}}" style="margin-bottom:15px">
+<h3 style="  color: #dc3545;"><mark>{{user_dict.user_name}}</mark>'s Recommended Movies</h3>
 
 
 
-       <input type="Submit" value="Movies Recommendations "
-                   style="margin-bottom: 20px; color: red;
-                    background-color: #fff; border: 2px solid #ff69b4;
-                    border-radius: 5px; padding: 10px; cursor: pointer;
-                    transition: background-color 0.3s, border-color 0.3s;"  >
 
-    </form></div>
+
 
 
 </div>
@@ -133,21 +84,18 @@ body {
                             Year: <span style="color: #17a2b8;margin-right: 20px;">{{movie.year }}</span>
                             Rating: <span style="color: #ffc107;">{{movie.rating }}</span><br><br>
                         <div style="display: flex; justify-content: space-around;">
-                            <form action="/users/{{user_dict.user_id}}/update_movie/{{movie.movie_id}}">
+
+                            <form action="/add_recommended_movie/{{user_dict.user_id}}/{{movie.movie_id}}">
+
                                 <input type="submit" style="background-color: #28a745;
                                 color: #fff; border: none;
                                  border-radius: 5px;
                                   padding: 5px 15px;
                                  cursor: pointer;
-                                 transition: background-color 0.3s, color 0.3s;" value="EDIT">
+                                 transition: background-color 0.3s, color 0.3s;" value="Add to movies List">
+
                             </form>
-                            <form action="/users/{{user_dict.user_id}}/delete_movie/{{movie.movie_id}}">
-                                <input type="submit" style="background-color: #dc3545;
-                                 color: #fff; border: none;
-                                 border-radius: 5px;
-                                  padding: 5px 15px; cursor: pointer;
-                                 transition: background-color 0.3s, color 0.3s;" value="DELETE">
-                            </form>
+
                         </div>
                     </div>
                 </li>
@@ -165,14 +113,11 @@ body {
 
 
 <div style="display: flex; justify-content: center;">
-     <form action="/">
-            <input type="Submit" value="Go Back to Home Page "
-                   style="margin-bottom: 20px; margin-left: 20px; color: red;
-                    background-color: #fff; border: 2px solid #ff69b4;
-                    border-radius: 5px; padding: 10px; cursor: pointer;
-                    transition: background-color 0.3s, border-color 0.3s;"  class="home">
-
-        </form>
+     <button style="margin-bottom: 20px; margin-left: 20px;
+        color: red; border-radius: 10px; padding: 10px; text-decoration: none;
+         background-color: lime blue;  ; cursor: pointer;">
+    <a href="/users/{{user_dict.user_id}}" style="text-decoration: none; color: inherit;">Back to Favourite Movies</a>
+</button>
 
     <form action="{% if current_user.is_admin %}/admin/logout{% else %}/logout{% endif %}">
 

@@ -1,15 +1,19 @@
 from flask import render_template, redirect, url_for, request, flash, abort
 from sqlalchemy import or_
-from data_managers.data_models import User,Movie,Review,db
+from data_managers.data_models import User, Movie, Review, db
 from data_managers.data_manager_interface_sql import session
 from main import app, data_manager
 from reusable_functions.movie_fetch import movie_fetch
 from api import api
-from flask_cors import  CORS
-
+from flask_cors import CORS
+import asynchat
+import asyncore
+from Movies_recommendation.movies_recommended import recommended_movies_data_fech_list, movies_recommendations
+import re
 
 app.register_blueprint(api, url_prefix='/api')
 CORS(app, origins='http://localhost:3000')
+
 
 @app.route('/')
 def home():
@@ -24,7 +28,7 @@ def list_users():
         users = data_manager.list_all_users()
         return render_template('users.html', users=users)
     except Exception as error:
-        return render_template("tryAgain.html" )
+        return render_template("tryAgain.html")
 
 
 def user_dictionary(user_id):
@@ -39,17 +43,18 @@ def user_dictionary(user_id):
     else:
         return {}
 
+
 @app.route("/users/<int:user_id>")
 def user_movies_list(user_id):
     """function to implement the add movie to a particular user with the given id."""
     try:
-        user_dict= user_dictionary(user_id)
-        return render_template("favourite_movie.html", user_dict=user_dict )
+        user_dict = user_dictionary(user_id)
+        return render_template("favourite_movie.html", user_dict=user_dict)
     except Exception as error:
         return render_template("tryAgain.html", error=error)
 
 
-@app.route("/add_user", methods= ["GET", "POST"])
+@app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     """function to implement the add user in the given user data."""
     try:
@@ -71,8 +76,8 @@ def add_user():
                     name=name.title(),
                     email=email,
                     password=password,
-                    is_admin=True if name.lower()=="admin" else False,
-                    movie=  []
+                    is_admin=True if name.lower() == "admin" else False,
+                    movie=[]
                 )
             data_manager.add_user(user)
             return redirect(url_for("list_users"))
@@ -132,7 +137,6 @@ def add_user_movie(user_id):
         return render_template("tryAgain.html", error=error)
 
 
-
 @app.route("/users/<int:user_id>/update_movie/<int:movie_id>", methods=["GET", "POST"])
 def update_movie(user_id, movie_id):
     """function to implement the update the movie details with the given movie id for a
@@ -165,9 +169,9 @@ def delete_movie(user_id, movie_id):
     """function to implement to delete a movie with a given id for a given user"""
     try:
         users_list = data_manager.list_all_users()
-        user_dict =user_dictionary(user_id)
+        user_dict = user_dictionary(user_id)
         movie = data_manager.get_movie(movie_id)
-        user= data_manager.get_user(user_id)
+        user = data_manager.get_user(user_id)
         if movie not in user.movie:
             return render_template("no_movie_found.html", user_dict=user_dict)
         if movie:
@@ -178,7 +182,6 @@ def delete_movie(user_id, movie_id):
         return render_template("tryAgain.html", error=error)
 
 
-
 @app.route("/sort/<int:user_id>", methods=["GET", "POST"])
 def sort_movies(user_id):
     """Function to sort the movie in """
@@ -187,18 +190,18 @@ def sort_movies(user_id):
         sorted_movie_list_by_movie_name_ascending = data_manager.sort_by_movie_name_ascending(user_id)
         sorted_movie_list_by_movie_year_descending = data_manager.sort_by_movie_year_descending(user_id)
         sorted_movie_list_by_rating = data_manager.sort_by_movie_rating_descending(user_id)
-        sort_by= request.args.get("sort_by")
+        sort_by = request.args.get("sort_by")
         if sort_by == "name":
-            sorted_movie_list= sorted_movie_list_by_movie_name_ascending
-        elif sort_by== "rating":
-            sorted_movie_list= sorted_movie_list_by_rating
+            sorted_movie_list = sorted_movie_list_by_movie_name_ascending
+        elif sort_by == "rating":
+            sorted_movie_list = sorted_movie_list_by_rating
         elif sort_by == "year":
-            sorted_movie_list= sorted_movie_list_by_movie_year_descending
+            sorted_movie_list = sorted_movie_list_by_movie_year_descending
         else:
             sorted_movie_list = []
-        user_dict= user_dictionary(user_id)
+        user_dict = user_dictionary(user_id)
         user_dict["sort_by"] = sort_by
-        user_dict["movies"]= sorted_movie_list
+        user_dict["movies"] = sorted_movie_list
         return render_template("favourite_movie.html", user_dict=user_dict)
     except Exception as error:
         return render_template("tryAgain.html", error=error)
@@ -208,12 +211,12 @@ def sort_movies(user_id):
 def search_movie(user_id):
     """Function to implement the movies on searched keyword:"""
     try:
-        user_dict= user_dictionary(user_id)
+        user_dict = user_dictionary(user_id)
         if request.method == "POST":
             keyword = request.form.get("keyword")
             search_movies_list = data_manager.search_movie(user_id, keyword)
             user_dict["keyword"] = keyword
-            user_dict["movies"]= search_movies_list
+            user_dict["movies"] = search_movies_list
             if search_movies_list:
                 return render_template("search_movie.html", user_dict=user_dict)
             else:
@@ -221,6 +224,79 @@ def search_movie(user_id):
         return render_template("favourite_movie.html", user_dict=user_dict)
     except Exception as error:
         return render_template("tryAgain.html", error=error)
+
+
+def helper(movies_response_data_list):
+    movies = []
+    for movie in movies_response_data_list:
+        existing_movie = data_manager.movie_exist_or_not(movie["Title"])
+        if existing_movie:
+            movies.append(existing_movie)
+        else:
+            new_movie = Movie(
+                movie_name=movie["Title"],
+                director=movie["Director"],
+                rating=movie["imdbRating"] if movie["imdbRating"] != "N/A" else None,
+                year=movie["Year"],
+                poster=movie["Poster"],
+                note=""
+            )
+            movies.append(new_movie)
+            data_manager.add_movie(new_movie)
+    return movies
+
+
+@app.route("/recommended/<int:user_id>", methods=["GET", "POST"])
+def recommended_movies(user_id):
+    """Function to implement the movies on searched keyword:"""
+    try:
+        user = data_manager.get_user(user_id)
+        user_movies = user.movie
+        pattern = r"title= ([\w\s:]+)"
+        # Use findall to extract all matches
+        titles = re.findall(pattern, str(user_movies))
+        user_dict = user_dictionary(user_id)
+        print(titles)
+        if titles:
+            movies_recommended_tuple = recommended_movies_data_fech_list()
+            movies_recommended, length = movies_recommended_tuple
+            print(movies_recommended)
+            print(length)
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            if  len(movies_recommended) >= 7:
+                movies = helper(movies_recommended)
+                user_dict["movies"] = movies
+                print(movies)
+                print("+++++++++++++++++++++++++++++")
+                return render_template("recommended_movies.html", user_dict=user_dict)
+            else:
+                user_movies_list = titles
+                movies_recommendations(user_movies_list)
+                print(user_movies_list)
+                movies_recommended_tuple = recommended_movies_data_fech_list()
+                movies_recommended, length = movies_recommended_tuple
+                movies = helper(movies_recommended)
+                print("**************")
+                print(movies)
+                user_dict["movies"] = movies
+                return render_template("recommended_movies.html", user_dict=user_dict)
+        else:
+            flash("Not enough movies for recommendations ! Add at least 3 movies for recommendations.")
+            return render_template("recommended_movies.html", user_dict=user_dict)
+    except Exception as error:
+        return render_template("tryAgain.html", error=error)
+
+@app.route("/add_recommended_movie/<int:user_id>/<int:movie_id>")
+def add_recommended_movie(user_id, movie_id):
+    """funcition to add the recommended movie to a particular user."""
+    user= data_manager.get_user(user_id)
+    movie = data_manager.get_movie(movie_id)
+    if movie not in user.movie:
+        user.movie.append(movie)
+        data_manager.commit_change()  # Commit the session after appending the existing movie
+        return redirect(url_for("user_movies_list", user_id=user_id))
+    else:
+        return render_template("movie_already_exists.html", user_name=user.name, user_id=user_id)
 
 
 @app.route("/add_review/<int:user_id>/<int:movie_id>", methods=["GET", "POST"])
@@ -233,10 +309,10 @@ def add_review(user_id, movie_id):
         review_dict = {
             "movie_id": movie_id,
             "user_id": user_id,
-            "movie":movie_to_review,
-            "reviews":review_movie
+            "movie": movie_to_review,
+            "reviews": review_movie
         }
-        movie= movie_to_review
+        movie = movie_to_review
         reviews = review_movie
         if request.method == "POST":
             review = request.form['review']
@@ -254,7 +330,8 @@ def add_review(user_id, movie_id):
             )
             data_manager.add_review(new_review)
             return redirect(url_for("add_review", user_id=user_id, movie_id=movie_id))
-        return render_template("movie_review.html", review_dict=review_dict, movie= movie_to_review,reviews=review_movie)
+        return render_template("movie_review.html", review_dict=review_dict, movie=movie_to_review,
+                               reviews=review_movie)
     except Exception as error:
         return render_template("tryAgain.html", error=error)
 
@@ -267,7 +344,7 @@ def delete_review(review_id):
         print(review_to_delete.movie_id, review_to_delete.user_id)
         if review_to_delete:
             data_manager.delete_review(review_to_delete)
-            return redirect(url_for("add_review", user_id=review_to_delete.user_id,movie_id=review_to_delete.movie_id))
+            return redirect(url_for("add_review", user_id=review_to_delete.user_id, movie_id=review_to_delete.movie_id))
     except Exception as error:
         return render_template("tryAgain.html", error=error)
 
@@ -289,7 +366,7 @@ def update_review(review_id):
                 review_to_update.review_text = review
             review_to_update.rating = rating if rating else 0
             data_manager.commit_change()
-            return redirect(url_for("add_review", user_id=review_to_update.user_id,movie_id=review_to_update.movie_id))
+            return redirect(url_for("add_review", user_id=review_to_update.user_id, movie_id=review_to_update.movie_id))
         return render_template("edit_review.html", movie=review_to_update.movie, review=review_to_update)
 
     except Exception as error:
@@ -297,7 +374,6 @@ def update_review(review_id):
 
 
 if __name__ == '__main__':
-    #with app.app_context():
-     #   db.create_all()
+    # with app.app_context():
+    #   db.create_all()
     app.run(debug=True, host='0.0.0.0', port=5000)
-

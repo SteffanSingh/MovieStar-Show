@@ -92,7 +92,7 @@ class SQLiteDataManager(DataManagerInterface):
             raise ValueError("Movie not found")
 
     def movie_exist_or_not(self, movie):
-        existing_movie =db.session.query(Movie).filter_by(movie_name=movie).first()
+        existing_movie = db.session.query(Movie).filter_by(movie_name=movie).first()
         return existing_movie
 
     def user_by_email(self, email_check):
