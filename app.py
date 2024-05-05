@@ -11,6 +11,11 @@ import asyncore
 from Movies_recommendation.movies_recommended import recommended_movies_data_fech_list, movies_recommendations
 import re
 
+from flask_cors import  CORS
+import asynchat
+import asyncore
+ 
+
 app.register_blueprint(api, url_prefix='/api')
 CORS(app, origins='http://localhost:3000')
 
