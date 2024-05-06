@@ -1,6 +1,6 @@
 # MovieStar Show
 
-## A movie web app, where users can authenticate and can add, delete, edit movies and reviews for a particular movie.Also Movies are recommended based on existing movies list.
+## A movie web app, where users can authenticate and can add, delete, edit movies and reviews for a particular movie.Also Movies are recommended based on user´s existing movies list.
   * It is a server-side-rendering project.
   * Searching movie by movie name, rating, released year, director.
   * Sort the movies for a particular user by rating, movie name, year.
