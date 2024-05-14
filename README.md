@@ -12,6 +12,8 @@
  
 <img src="https://github.com/SteffanSingh/MovieWebApp-SQL/blob/d1565b102a8d5009499671ffeb333475c5f8ab00/MovieWebPictures/4.png" alt="movie web Admin page">
 <img src="https://github.com/SteffanSingh/MovieWebApp-SQL/blob/d1565b102a8d5009499671ffeb333475c5f8ab00/MovieWebPictures/5.png" alt="movie web user movies page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="movie web user movies page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="movie web user movies page">
  
 
 MovieStar-Show web application.
