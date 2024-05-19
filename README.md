@@ -7,13 +7,13 @@
   * Movies recommendations based on the existing movies list.
   * Technologies : Python| Flask| SQL| ChatgptAI (Recommendation of movies)| Jinja2| HTML| CSS.
     
-<img src="https://github.com/SteffanSingh/MovieWebApp-SQL/blob/6ede50f6237acf46f9be8d032e4989ef59bbdbb6/Project%20images/HomePage.png" alt="movie web app home page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="movie web app home page">
 
  
-<img src="https://github.com/SteffanSingh/MovieWebApp-SQL/blob/d1565b102a8d5009499671ffeb333475c5f8ab00/MovieWebPictures/4.png" alt="movie web Admin page">
-<img src="https://github.com/SteffanSingh/MovieWebApp-SQL/blob/d1565b102a8d5009499671ffeb333475c5f8ab00/MovieWebPictures/5.png" alt="movie web user movies page">
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="movie web user movies page">
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="movie web user movies page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow2details.png" alt="movie details page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow3.png" alt="movie recommendation page">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="eamil welcome">
+<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt=" email recommend page">
  
 
 MovieStar-Show web application.
