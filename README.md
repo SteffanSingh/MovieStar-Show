@@ -116,7 +116,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Project Demo Video
 
-Check out the [project demo video 2](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
+Check out the [project demo video ](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
 
 ### Project Demo Images
 
