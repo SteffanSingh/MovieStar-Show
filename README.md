@@ -112,7 +112,7 @@ We welcome contributions! Please follow these steps:
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
-# MovieStar Show application images demo
+# MovieStar Show application demo images
  
     
 <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="movie web app home page">
