@@ -1,6 +1,6 @@
-# MovieWeb Project
+# MovieStar Show
 
-MovieWeb is a web application for managing and browsing a collection of movies. Users can add, update, delete, and view movies. The application also allows for sorting movies based on various criteria such as name, rating, and year.
+MovieStar Show is a web application for managing and browsing a collection of movies. Users can add, update, delete, and view movies. The application also allows for sorting movies based on various criteria such as name, rating, and year.
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@ MovieWeb is a web application for managing and browsing a collection of movies. 
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
-- [Demo Images](#demo-images)
+- [Demo](#demo)
 
 ## Features
 
@@ -37,8 +37,8 @@ MovieWeb is a web application for managing and browsing a collection of movies. 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/movieweb.git
-    cd movieweb
+    git clone https://github.com/SteffanSingh/MovieStar-Show.git
+    cd MovieStar-Show
     ```
 
 2. Create a virtual environment and activate it:
@@ -112,14 +112,18 @@ We welcome contributions! Please follow these steps:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Demo Images
+## Demo
 
-MovieStar Show application demo images
+### Project Demo Videos
+
+Check out the [project demo video 1](https://www.youtube.com/watch?v=gKQUCXWRmWI&t=182s) and [project demo video 2](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
+
+### Project Demo Images
 
 <p align="center">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="Movie Web App Home Page">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="MovieStar Show Home Page">
   <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow2details.png" alt="Movie Details Page">
   <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow3.png" alt="Movie Recommendation Page">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="Email Welcome">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="Email Recommend Page">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="Welcome Email">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="Email Recommendation Page">
 </p>
