@@ -18,7 +18,7 @@ MovieStar Show is a web application for managing and browsing a collection of mo
 - Add, update, delete, and view movies
 - Search for movies
 - Sort movies by name, rating, and year
-- Responsive design with Bootstrap
+- Movies recommendation based on interests
 - Email notifications for various actions
 
 ## Installation
