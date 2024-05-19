@@ -10,6 +10,7 @@ MovieWeb is a web application for managing and browsing a collection of movies. 
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
+- [Demo Images](#demo-images)
 
 ## Features
 
@@ -111,17 +112,14 @@ We welcome contributions! Please follow these steps:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## Demo Images
 
-# MovieStar Show application demo images
- 
-    
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="movie web app home page">
+MovieStar Show application demo images
 
- 
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow2details.png" alt="movie details page">
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow3.png" alt="movie recommendation page">
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="eamil welcome">
-<img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt=" email recommend page">
- 
-
-MovieStar-Show web application.
+<p align="center">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="Movie Web App Home Page">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow2details.png" alt="Movie Details Page">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow3.png" alt="Movie Recommendation Page">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="Email Welcome">
+  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="Email Recommend Page">
+</p>
