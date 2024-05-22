@@ -153,12 +153,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Check out the [project demo video](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
 
-### Project Demo Images
 
-<p align="center">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow1.png" alt="MovieStar Show Home Page">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow2details.png" alt="Movie Details Page">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/48d4588760a33c2da88f8bff57e5ecb49c0864f7/Project%20images/movieStarshow3.png" alt="Movie Recommendation Page">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/welcomeEmail.png" alt="Welcome Email">
-  <img src="https://github.com/SteffanSingh/MovieStar-Show/blob/819df23a04e61b15bac652be41cf704bee196550/MovieWebPictures/movieRecommend.png" alt="Email Recommendation Page">
-</p>
