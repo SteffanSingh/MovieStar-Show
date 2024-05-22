@@ -4,13 +4,44 @@ MovieStar Show is a web application for managing and browsing a collection of mo
 
 ## Table of Contents
 
+- [Introduction](#introduction)
+- [Description](#description)
+- [Project Structure](#project-structure)
 - [Features](#features)
 - [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Installation Steps](#installation-steps)
 - [Usage](#usage)
+- [Deployment](#deployment)
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
 - [License](#license)
 - [Demo](#demo)
+
+## Introduction
+
+Welcome to MovieStar Show, a web application for managing and browsing a collection of movies. Users can add, update, delete, and view movies, as well as sort them based on various criteria such as name, rating, and year.
+
+- **User Authentication:** Secure signup, login, and password reset functionalities.
+- **Search Functionality:** Search for movies by title, rating, and year.
+- **Sorting:** Sort movies for a particular user by name, rating, and year.
+- **Technologies Used:** Python, Flask, SQLAlchemy, Jinja2, HTML, CSS.
+
+## Description
+
+MovieStar Show is designed to help users manage their movie collections. The application allows users to add, update, delete, and view movie details, search for movies, and sort them by various criteria.
+
+## Project Structure
+
+The MovieStar Show project is structured as follows:
+
+- `.authentication`: Contains the Python files for user signup, login, and password reset.
+- `.data`: Contains the SQLite database file and other data files.
+- `.data_manager`: Includes data management modules for handling movie data and queries.
+- `.implementation`: Contains the implementation Python files for users, movies, and recommendations.
+- `.static`: CSS files and image/icon assets.
+- `.templates`: HTML templates for web pages.
+- `app.py`: The main application file that connects routes and manages error handling.
 
 ## Features
 
@@ -18,7 +49,7 @@ MovieStar Show is a web application for managing and browsing a collection of mo
 - Add, update, delete, and view movies
 - Search for movies
 - Sort movies by name, rating, and year
-- Movies recommendation based on interests
+- Movie recommendations based on user interests
 - Email notifications for various actions
 
 ## Installation
@@ -32,7 +63,7 @@ MovieStar Show is a web application for managing and browsing a collection of mo
 - Flask-Bootstrap
 - Other dependencies listed in `requirements.txt`
 
-### Steps
+### Installation Steps
 
 1. Clone the repository:
 
@@ -76,6 +107,10 @@ MovieStar Show is a web application for managing and browsing a collection of mo
 4. Use the search bar to find movies.
 5. Sort movies using the dropdown menu.
 
+## Deployment
+
+The MovieStar Show application is currently deployed on PythonAnywhere. You can access the live version of the application at [https://moviestarshow.pythonanywhere.com/](https://moviestarshow.pythonanywhere.com/).
+
 ## API Endpoints
 
 ### User Endpoints
@@ -116,7 +151,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Project Demo Video
 
-Check out the [project demo video ](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
+Check out the [project demo video](https://www.youtube.com/watch?v=aiZVlWMnHu8) to see the MovieStar Show application in action.
 
 ### Project Demo Images
 
